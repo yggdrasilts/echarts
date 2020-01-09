@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
 
-import { EChartOption } from 'echarts';
-
 import * as node_echarts from 'node-echarts';
 import { buffer } from 'imagemin';
 import * as imageminJpegtran from 'imagemin-jpegtran';
 import imageminPngquant from 'imagemin-pngquant';
 
+import { Options } from './options.interface';
+
 @Injectable()
-export class AppService {
-  async getImage(options: EChartOption): Promise<Buffer> {
+export class EchartsService {
+  async getImage(opt: Options): Promise<Buffer> {
     return buffer(
       node_echarts({
-        option: options,
-        width: 600,
-        height: 250,
+        option: opt.echartOptions,
+        width: opt.options?.width || 600,
+        height: opt.options?.height || 250,
       }),
       {
         plugins: [

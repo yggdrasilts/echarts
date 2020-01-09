@@ -9,31 +9,36 @@ import {
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { Response } from 'express';
-import { AppService } from './app.service';
-import { EChartOption } from 'echarts';
-import { JoiValidationPipe } from './pipes/joi.validation.pipe';
-
 import * as Joi from '@hapi/joi';
 
-const schema = Joi.object({
-  body: {
-    options: Joi.object().required(),
-  },
-});
+import { JoiValidationPipe } from './pipes/joi.validation.pipe';
+
+import { EchartsService } from './echarts/echarts.service';
+import { Options } from './echarts/options.interface';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly echartsService: EchartsService) {}
 
   @Post('/image')
   @Header('Content-Type', 'image/png')
   @Header('Content-disposition', 'attachment;filename=echarts.png')
-  @UsePipes(new JoiValidationPipe(schema))
+  @UsePipes(
+    new JoiValidationPipe(
+      Joi.object({
+        echartOptions: Joi.object().required(),
+      }),
+    ),
+  )
   @ApiOperation({ summary: 'Get the image.' })
-  async getImage(@Body() options: EChartOption, @Res() response: Response) {
-    Logger.debug(`Incoming options: ${JSON.stringify(options)}`);
-    const result = await this.appService.getImage(options);
+  async getImage(@Body() opt: Options, @Res() response: Response) {
+    Logger.debug(`Incoming options: ${JSON.stringify(opt)}`);
+    const result = await this.echartsService.getImage(opt);
     response.setHeader('Content-Length', result.length);
+    response.setHeader(
+      'Content-disposition',
+      `attachment;filename=${opt.options.filename || 'echarts.png'}`,
+    );
     response.end(result);
   }
 }
