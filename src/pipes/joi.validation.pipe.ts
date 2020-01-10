@@ -1,10 +1,4 @@
-import {
-  PipeTransform,
-  Injectable,
-  ArgumentMetadata,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException, Logger } from '@nestjs/common';
 
 import { EChartOption } from 'echarts';
 
@@ -22,9 +16,7 @@ export class JoiValidationPipe implements PipeTransform {
   }
 
   transform(value: any, metadata: ArgumentMetadata) {
-    Logger.debug(
-      `[JoiValidationPipe] - options ${JSON.stringify(this.options)}`,
-    );
+    Logger.debug(`[JoiValidationPipe] - options ${JSON.stringify(this.options)}`);
     Logger.debug(`[JoiValidationPipe] - value ${JSON.stringify(value)}`);
     const { error } = this.schema.validate(value);
     if (error) {
