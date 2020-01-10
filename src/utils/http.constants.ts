@@ -3,5 +3,5 @@ import { MimeType } from './http-mime-type.constants';
 
 export class HTTP {
   static Header = Header;
-  static ContentType = MimeType;
+  static MimeType = MimeType;
 }

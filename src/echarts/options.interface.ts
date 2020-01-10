@@ -1,11 +1,15 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 import { EChartOption } from 'echarts';
 
-export interface Options {
+export class Options {
+  @ApiProperty({ name: 'echartOptions', type: 'EChartOption', required: true })
   echartOptions: EChartOption;
-  options?: apiOptions;
+  @ApiProperty({ required: false, type: 'ApiOptions' })
+  options?: ApiOptions;
 }
 
-interface apiOptions {
+interface ApiOptions {
   // Image width
   width?: number;
 

@@ -14,7 +14,6 @@ async function bootstrap() {
     .setTitle('Echarts API')
     .setDescription('API to get charts for backend services.')
     .setVersion('1.0')
-    .addTag('echarts')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
