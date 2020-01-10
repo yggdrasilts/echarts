@@ -1,7 +1,7 @@
 import { Header } from './http-header.constants';
-import { ContentType } from './http-content-type.constants';
+import { MimeType } from './http-mime-type.constants';
 
 export class HTTP {
   static Header = Header;
-  static ContentType = ContentType;
+  static ContentType = MimeType;
 }

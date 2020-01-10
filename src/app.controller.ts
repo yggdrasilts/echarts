@@ -16,7 +16,7 @@ export class AppController {
   constructor(private readonly echartsService: EchartsService) {}
 
   @Post(ApiRoutes.POST.IMAGE)
-  @Header(HTTP.Header.CONTENT_TYPE, HTTP.ContentType.Image.PNG)
+  @Header(HTTP.Header.CONTENT_TYPE, HTTP.ContentType.IMAGE.PNG)
   @Header(HTTP.Header.CONTENT_DISPOSITION, 'attachment;filename=echarts.png')
   @UsePipes(new JoiValidationPipe(imageBodyValidationSchema))
   @ApiOperation({ summary: 'Get the image.' })
