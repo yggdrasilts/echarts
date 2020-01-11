@@ -6,9 +6,6 @@ export const DEFAULT_IMAGE_HEIGHT = 250;
 
 export const DEFAULT_FILENAME = 'echarts.png';
 
-export const imageBodyValidationSchema = Joi.object({
+export const IMAGE_BODY_VALIDATION_SCHEMA = Joi.object({
   echartOptions: Joi.object().required(),
-  options: Joi.object()
-    .not()
-    .required(),
 });

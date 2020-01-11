@@ -1,4 +1,14 @@
-import { MimeTypeAudio, MimeTypeFont, MimeTypeImage } from './mime-type';
+import {
+  MimeTypeApplication,
+  MimeTypeAudio,
+  MimeTypeFont,
+  MimeTypeImage,
+  MimeTypeMessage,
+  MimeTypeModel,
+  MimeTypeMultipart,
+  MimeTypeText,
+  MimeTypeVideo,
+} from './mime-type';
 
 /**
  * MimeType build merging data from:
@@ -6,7 +16,7 @@ import { MimeTypeAudio, MimeTypeFont, MimeTypeImage } from './mime-type';
  *  - https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
  */
 export class MimeType {
-  static APPLICATION = {};
+  static APPLICATION = MimeTypeApplication;
 
   static AUDIO = MimeTypeAudio;
 
@@ -14,13 +24,13 @@ export class MimeType {
 
   static IMAGE = MimeTypeImage;
 
-  static MESSAGE = {};
+  static MESSAGE = MimeTypeMessage;
 
-  static MODEL = {};
+  static MODEL = MimeTypeModel;
 
-  static MULTIPART = {};
+  static MULTIPART = MimeTypeMultipart;
 
-  static TEXT = {};
+  static TEXT = MimeTypeText;
 
-  static VIDEO = {};
+  static VIDEO = MimeTypeVideo;
 }

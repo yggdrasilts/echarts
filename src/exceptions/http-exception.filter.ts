@@ -1,28 +1,33 @@
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, Logger } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { HttpHeaders } from '../utils/net';
+import { HttpHeaders, MimeType } from '../utils/net';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
+
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
+    const message = exception.message;
 
     const errorData = {
-      statusCode: status,
       timestamp: new Date().toISOString(),
-      request: {
-        method: request.method,
-        query: request.query,
-        body: request.body,
+      message,
+      details: {
+        request: {
+          method: request.method,
+          query: request.query,
+          body: request.body,
+        },
+        path: request.url,
       },
-      path: request.url,
     };
-    Logger.error(`[HttpExceptionFilter] ERROR ${JSON.stringify(errorData)}`);
-    response.setHeader(HttpHeaders.CONTENT_TYPE, 'application/json');
+    this.logger.error(`${JSON.stringify(errorData)}`);
+    response.setHeader(HttpHeaders.CONTENT_TYPE, MimeType.APPLICATION.JSON);
     response.status(status).json(errorData);
   }
 }
