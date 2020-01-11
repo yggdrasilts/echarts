@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 import * as node_echarts from 'node-echarts';
 
@@ -8,11 +8,12 @@ import imageminPngquant from 'imagemin-pngquant';
 
 import { DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT } from './constants';
 
-import { Options } from './options.interface';
+import { Options } from './entities/options.class';
 
 @Injectable()
 export class EchartsService {
-  async getImage(opt: Options): Promise<Buffer> {
+  getImage(opt: Options): Promise<Buffer> {
+    Logger.debug(`[EchartsService] Executing EchartsService.`);
     return buffer(
       node_echarts({
         option: opt.echartOptions,

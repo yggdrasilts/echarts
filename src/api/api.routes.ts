@@ -1,5 +1,5 @@
+import { PostRoutes } from './post.routes';
+
 export class ApiRoutes {
-  static POST = class {
-    static readonly IMAGE = '/image';
-  };
+  static POST = PostRoutes;
 }

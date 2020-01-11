@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { EchartsService } from './echarts/echarts.service';
+import { EchartsModule } from './echarts/echarts.module';
 
 import { AppController } from './app.controller';
 
 @Module({
-  imports: [],
+  imports: [EchartsModule],
   controllers: [AppController],
-  providers: [EchartsService],
+  providers: [],
 })
 export class AppModule {}
