@@ -19,7 +19,7 @@ export class EchartsService {
    *
    * @param {Options} opt {@link Options}.
    */
-  getImage(opt: Options): Promise<Buffer> {
+  async getImage(opt: Options): Promise<Buffer> {
     this.logger.debug(`Executing EchartsService.`);
     return buffer(
       node_echarts({

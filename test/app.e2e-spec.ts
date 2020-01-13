@@ -5,8 +5,8 @@ import * as request from 'supertest';
 
 import { API_ECHART_OPTIONS_SAMPLE } from '../src/echarts/entities/options.class';
 
-import { AppModule } from './../src/app.module';
-import { ApiRoutes } from './../src/api/api.routes';
+import { AppModule } from '../src/app.module';
+import { ApiRoutes } from '../src/api/api.routes';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -27,14 +27,38 @@ describe('AppController (e2e)', () => {
         .expect(HttpStatus.BAD_REQUEST);
     });
 
-    it(`${ApiRoutes.POST.IMAGE} 201`, () => {
+    it(`${ApiRoutes.POST.IMAGE} ${HttpStatus.CREATED}`, () => {
       const body = {
         echartOptions: API_ECHART_OPTIONS_SAMPLE,
       };
       return request(app.getHttpServer())
         .post(ApiRoutes.POST.IMAGE)
         .send(body)
-        .expect(201);
+        .expect(HttpStatus.CREATED);
+    });
+
+    it(`${ApiRoutes.POST.IMAGE_STREAM} ${HttpStatus.BAD_REQUEST}`, () => {
+      return request(app.getHttpServer())
+        .post(ApiRoutes.POST.IMAGE_STREAM)
+        .expect(HttpStatus.BAD_REQUEST);
+    });
+
+    it(`${ApiRoutes.POST.IMAGE_STREAM} ${HttpStatus.CREATED}`, () => {
+      const body = {
+        echartOptions: API_ECHART_OPTIONS_SAMPLE,
+      };
+      return request(app.getHttpServer())
+        .post(ApiRoutes.POST.IMAGE)
+        .send(body)
+        .expect(HttpStatus.CREATED);
+    });
+  });
+
+  describe('Axiosfit', () => {
+    it('Get Image Using Observables', () => {
+      return request(app.getHttpServer())
+        .get('axiosfitGetImagesUsingObservables')
+        .expect(HttpStatus.CREATED);
     });
   });
 });

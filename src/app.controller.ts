@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Header, Res, UsePipes, Logger, Get } from '@nestjs/common';
-import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags, ApiExcludeEndpoint } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags, ApiExcludeEndpoint, ApiOperation, ApiProduces } from '@nestjs/swagger';
 import { Response } from 'express';
 
 import * as fs from 'fs';
@@ -29,6 +29,8 @@ export class AppController {
   @Post(ApiRoutes.POST.IMAGE)
   @Header(HttpHeaders.CONTENT_TYPE, MimeType.IMAGE.PNG)
   @UsePipes(new BodyValidationPipe(IMAGE_BODY_VALIDATION_SCHEMA))
+  @ApiOperation({ description: 'Gets an echarts image as attachment.' })
+  @ApiProduces(MimeType.IMAGE.PNG)
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
   async getImage(@Body() opt: Options, @Res() response: Response): Promise<void> {
@@ -41,6 +43,10 @@ export class AppController {
 
   @Post(ApiRoutes.POST.IMAGE_STREAM)
   @UsePipes(new BodyValidationPipe(IMAGE_BODY_VALIDATION_SCHEMA))
+  @Header(HttpHeaders.CONTENT_TYPE, MimeType.APPLICATION.OCTET_STREAM)
+  @Header(HttpHeaders.CONTENT_DISPOSITION, 'attachment;filename=image.png')
+  @ApiOperation({ description: 'Gets an echarts image as Buffer.' })
+  @ApiProduces(MimeType.APPLICATION.OCTET_STREAM)
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
   async getImageStream(@Body() opt: Options): Promise<Buffer> {
