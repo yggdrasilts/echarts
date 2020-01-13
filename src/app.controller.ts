@@ -15,6 +15,8 @@ import { HttpHeaders, MimeType } from './utils/net';
 @ApiTags('echarts')
 @Controller()
 export class AppController {
+  private readonly logger = new Logger(AppController.name);
+
   constructor(private readonly echartsService: EchartsService) {}
 
   @Post(ApiRoutes.POST.IMAGE)
@@ -23,11 +25,11 @@ export class AppController {
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
   async getImage(@Body() opt: Options, @Res() response: Response) {
-    Logger.debug(`[AppController] Incoming options: ${JSON.stringify(opt)}`);
+    this.logger.debug(`Incoming options: ${JSON.stringify(opt)}`);
     const result = await this.echartsService.getImage(opt);
     response.setHeader(HttpHeaders.CONTENT_LENGTH, result.length);
     response.setHeader(HttpHeaders.CONTENT_DISPOSITION, `attachment;filename=${opt.options?.filename || DEFAULT_FILENAME}`);
-    Logger.debug(`[AppController] Send Result.`);
+    this.logger.debug(`Send Result.`);
     response.end(result);
   }
 }
