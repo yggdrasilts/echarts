@@ -2,6 +2,8 @@ import { Controller, Post, Body, Header, Res, UsePipes, Logger } from '@nestjs/c
 import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
+import { HttpHeaders, MimeType } from '@yggdrasilts/volundr';
+
 import { ApiRoutes } from './api/api.routes';
 
 import { JoiValidationPipe } from './pipes/joi.validation.pipe';
@@ -9,8 +11,6 @@ import { JoiValidationPipe } from './pipes/joi.validation.pipe';
 import { EchartsService } from './echarts/echarts.service';
 import { Options } from './echarts/entities/options.class';
 import { IMAGE_BODY_VALIDATION_SCHEMA, DEFAULT_FILENAME } from './echarts/constants';
-
-import { HttpHeaders, MimeType } from './utils/net';
 
 @ApiTags('echarts')
 @Controller()
