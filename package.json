@@ -1,8 +1,8 @@
 {
   "name": "echarts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "David López <davidlopez.david@gmail.com>",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
