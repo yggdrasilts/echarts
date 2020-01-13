@@ -7,7 +7,7 @@ import { ImageOptions } from './image-options.class';
 /**
  * Constant to be use as SWAGGER input body sample.
  */
-export const API_ECHART_OPTIONS_SAMPLE = {
+export const API_ECHART_OPTIONS_SAMPLE: EChartOption = {
   title: {
     text: 'Sample',
   },
