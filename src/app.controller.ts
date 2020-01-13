@@ -6,7 +6,7 @@ import { HttpHeaders, MimeType } from '@yggdrasilts/volundr';
 
 import { ApiRoutes } from './api/api.routes';
 
-import { JoiValidationPipe } from './pipes/joi.validation.pipe';
+import { BodyValidationPipe } from './pipes/body.validation.pipe';
 
 import { EchartsService } from './echarts/echarts.service';
 import { Options } from './echarts/entities/options.class';
@@ -21,7 +21,7 @@ export class AppController {
 
   @Post(ApiRoutes.POST.IMAGE)
   @Header(HttpHeaders.CONTENT_TYPE, MimeType.IMAGE.PNG)
-  @UsePipes(new JoiValidationPipe(IMAGE_BODY_VALIDATION_SCHEMA))
+  @UsePipes(new BodyValidationPipe(IMAGE_BODY_VALIDATION_SCHEMA))
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
   async getImage(@Body() opt: Options, @Res() response: Response) {

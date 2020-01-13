@@ -3,6 +3,9 @@ import { Request, Response } from 'express';
 
 import { HttpHeaders, MimeType } from '@yggdrasilts/volundr';
 
+/**
+ * Filter to catch HttpException manipulating the response to get understandable response.
+ */
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);

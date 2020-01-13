@@ -4,6 +4,9 @@ import { EChartOption } from 'echarts';
 
 import { ImageOptions } from './image-options.class';
 
+/**
+ * Constant to be use as SWAGGER input body sample.
+ */
 export const API_ECHART_OPTIONS_SAMPLE = {
   title: {
     text: 'Sample',
@@ -88,6 +91,9 @@ export const API_ECHART_OPTIONS_SAMPLE = {
   ],
 };
 
+/**
+ * Class to configure echarts options.
+ */
 export class Options {
   @ApiProperty({
     type: 'EChartOption',

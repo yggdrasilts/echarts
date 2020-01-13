@@ -14,11 +14,12 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('Echarts API')
-    .setDescription('API to get charts as image file.')
+    .setDescription('API to get charts, using echartsjs, as image file.')
+    .setExternalDoc('More about echartsjs', 'https://echarts.apache.org/en/index.html')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/v1', app, document);
 
   await app.listen(3000);
 

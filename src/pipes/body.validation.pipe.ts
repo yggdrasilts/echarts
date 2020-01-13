@@ -2,9 +2,12 @@ import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException, Logge
 
 import { Schema } from '@hapi/joi';
 
+/**
+ * Pipe to validate request body.
+ */
 @Injectable()
-export class JoiValidationPipe implements PipeTransform {
-  private readonly logger = new Logger(JoiValidationPipe.name);
+export class BodyValidationPipe implements PipeTransform {
+  private readonly logger = new Logger(BodyValidationPipe.name);
 
   constructor(private readonly schema: Schema) {}
 

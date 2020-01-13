@@ -1,3 +1,6 @@
+/**
+ * Application constants.
+ */
 import * as Joi from '@hapi/joi';
 
 export const DEFAULT_IMAGE_WIDTH = 600;
