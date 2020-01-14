@@ -53,12 +53,4 @@ describe('AppController (e2e)', () => {
         .expect(HttpStatus.CREATED);
     });
   });
-
-  describe('Axiosfit', () => {
-    it('Get Image Using Observables', () => {
-      return request(app.getHttpServer())
-        .get('axiosfitGetImagesUsingObservables')
-        .expect(HttpStatus.CREATED);
-    });
-  });
 });
