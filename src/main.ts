@@ -18,8 +18,10 @@ async function bootstrap() {
     .setExternalDoc('More about echartsjs', 'https://echarts.apache.org/en/index.html')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/v1', app, document);
+  const echartsDocument = SwaggerModule.createDocument(app, options, {
+    include: [AppModule],
+  });
+  SwaggerModule.setup('api/v1', app, echartsDocument);
 
   await app.listen(3000);
 
