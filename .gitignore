@@ -1,5 +1,5 @@
-# Files
-*.png
+# Folders
+out
 
 # node
 package-lock.json

@@ -1,6 +1,6 @@
 import { Controller, Logger, Get } from '@nestjs/common';
 
-import * as fs from 'fs';
+import * as fse from 'fs-extra';
 
 import { Axiosfit } from '@yggdrasilts/axiosfit';
 
@@ -20,7 +20,7 @@ export class AxiosfitController {
     axiosfitService.getImageAsBase64({ echartOptions: API_ECHART_OPTIONS_SAMPLE }).subscribe(
       axiosResponse => {
         this.logger.debug('Getting data.');
-        fs.writeFileSync('imageObservable.png', BufferUtils.toBinary(axiosResponse.data), 'binary');
+        fse.outputFileSync('out/imageObservable.png', BufferUtils.toBinary(axiosResponse.data), 'binary');
       },
       axiosError => this.logger.error(axiosError),
     );
@@ -33,7 +33,7 @@ export class AxiosfitController {
       .baseUrl('http://localhost:3000')
       .create(EchartsAxiosfitServicePromise);
     const response = await axiosfitService.getImageAsBase64({ echartOptions: API_ECHART_OPTIONS_SAMPLE });
-    fs.writeFileSync('imagePromise.png', BufferUtils.toBinary(response.data), 'binary');
+    fse.outputFileSync('out/imagePromise.png', BufferUtils.toBinary(response.data), 'binary');
     return 'File saved.';
   }
 }
