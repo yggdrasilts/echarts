@@ -34,16 +34,15 @@ export class AppController {
     response.end(result);
   }
 
-  @Post(ApiRoutes.POST.IMAGE_STREAM)
+  @Post(ApiRoutes.POST.IMAGE_BASE_64)
   @UsePipes(new BodyValidationPipe(IMAGE_BODY_VALIDATION_SCHEMA))
-  @Header(HttpHeaders.CONTENT_TYPE, MimeType.APPLICATION.OCTET_STREAM)
-  @Header(HttpHeaders.CONTENT_DISPOSITION, 'attachment;filename=image.png')
-  @ApiOperation({ description: 'Gets an echarts image as Buffer.' })
-  @ApiProduces(MimeType.APPLICATION.OCTET_STREAM)
+  @Header(HttpHeaders.CONTENT_DISPOSITION, MimeType.TEXT.PLAIN)
+  @ApiOperation({ description: 'Gets an echarts image as base64 string.' })
+  @ApiProduces(MimeType.TEXT.PLAIN)
   @ApiBadRequestResponse({ description: 'Bad Request.' })
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
-  async getImageStream(@Body() opt: Options): Promise<Buffer> {
+  async getImageInBase64(@Body() opt: Options): Promise<string> {
     this.logger.debug(`Incoming options: ${JSON.stringify(opt)}`);
-    return this.echartsService.getImage(opt);
+    return (await this.echartsService.getImage(opt)).toString('base64');
   }
 }

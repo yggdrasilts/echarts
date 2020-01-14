@@ -37,13 +37,13 @@ describe('AppController (e2e)', () => {
         .expect(HttpStatus.CREATED);
     });
 
-    it(`${ApiRoutes.POST.IMAGE_STREAM} ${HttpStatus.BAD_REQUEST}`, () => {
+    it(`${ApiRoutes.POST.IMAGE_BASE_64} ${HttpStatus.BAD_REQUEST}`, () => {
       return request(app.getHttpServer())
-        .post(ApiRoutes.POST.IMAGE_STREAM)
+        .post(ApiRoutes.POST.IMAGE_BASE_64)
         .expect(HttpStatus.BAD_REQUEST);
     });
 
-    it(`${ApiRoutes.POST.IMAGE_STREAM} ${HttpStatus.CREATED}`, () => {
+    it(`${ApiRoutes.POST.IMAGE_BASE_64} ${HttpStatus.CREATED}`, () => {
       const body = {
         echartOptions: API_ECHART_OPTIONS_SAMPLE,
       };

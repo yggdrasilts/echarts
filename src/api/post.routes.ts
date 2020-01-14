@@ -3,5 +3,5 @@
  */
 export class PostRoutes {
   static readonly IMAGE = '/image';
-  static readonly IMAGE_STREAM = '/image-stream';
+  static readonly IMAGE_BASE_64 = '/image-base64';
 }
