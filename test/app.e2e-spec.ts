@@ -3,7 +3,7 @@ import { INestApplication, HttpStatus } from '@nestjs/common';
 
 import * as request from 'supertest';
 
-import { API_ECHART_OPTIONS_SAMPLE } from '../src/echarts/entities/options.class';
+import { API_ECHART_OPTIONS_SAMPLE } from '../src/echarts/entities/options.sample';
 
 import { AppModule } from '../src/app.module';
 import { ApiRoutes } from '../src/api/api.routes';

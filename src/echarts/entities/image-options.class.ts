@@ -10,7 +10,7 @@ export class ImageOptions {
   width?: number;
 
   // Image height
-  @ApiProperty({ required: false, description: 'Image heigth.', example: DEFAULT_IMAGE_HEIGHT })
+  @ApiProperty({ required: false, description: 'Image height.', example: DEFAULT_IMAGE_HEIGHT })
   height?: number;
 
   // Download file name
