@@ -8,6 +8,7 @@ import { API_ECHART_OPTIONS_SAMPLE } from '../echarts/entities/options.class';
 
 import { EchartsAxiosfitService } from './services/echarts.axiosfit.service';
 import { EchartsAxiosfitServicePromise } from './services/echarts.axiosfit.promise.service';
+import { BufferUtils } from '@yggdrasilts/volundr';
 
 @Controller()
 export class AxiosfitController {
@@ -16,10 +17,10 @@ export class AxiosfitController {
   @Get('axiosfitGetImagesUsingObservables')
   async axiosfitGetImagesUsingObservables(): Promise<string> {
     const axiosfitService = new Axiosfit<EchartsAxiosfitService>().baseUrl('http://localhost:3000').create(EchartsAxiosfitService);
-    axiosfitService.getImageStream({ echartOptions: API_ECHART_OPTIONS_SAMPLE }).subscribe(
+    axiosfitService.getImageAsBase64({ echartOptions: API_ECHART_OPTIONS_SAMPLE }).subscribe(
       axiosResponse => {
         this.logger.debug('Getting data.');
-        fs.writeFileSync('imageObservable.png', Buffer.from(axiosResponse.data));
+        fs.writeFileSync('imageObservable.png', BufferUtils.toBinary(axiosResponse.data), 'binary');
       },
       axiosError => this.logger.error(axiosError),
     );
@@ -31,8 +32,8 @@ export class AxiosfitController {
     const axiosfitService = new Axiosfit<EchartsAxiosfitServicePromise>()
       .baseUrl('http://localhost:3000')
       .create(EchartsAxiosfitServicePromise);
-    const response = await axiosfitService.getImageStream({ echartOptions: API_ECHART_OPTIONS_SAMPLE });
-    fs.writeFileSync('imagePromise.png', Buffer.from(response.data));
+    const response = await axiosfitService.getImageAsBase64({ echartOptions: API_ECHART_OPTIONS_SAMPLE });
+    fs.writeFileSync('imagePromise.png', BufferUtils.toBinary(response.data), 'binary');
     return 'File saved.';
   }
 }

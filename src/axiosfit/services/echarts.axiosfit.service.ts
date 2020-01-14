@@ -11,8 +11,8 @@ export class EchartsAxiosfitService {
     return null;
   }
 
-  @POST('/image-stream')
-  public getImageStream(@Body() options: Options): Observable<AxiosResponse<Buffer>> {
+  @POST('/image-base64')
+  public getImageAsBase64(@Body() options: Options): Observable<AxiosResponse<string>> {
     return null;
   }
 }

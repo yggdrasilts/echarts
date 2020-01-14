@@ -2,7 +2,7 @@ import { Controller, Post, Body, Header, Res, UsePipes, Logger } from '@nestjs/c
 import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags, ApiOperation, ApiProduces } from '@nestjs/swagger';
 import { Response } from 'express';
 
-import { HttpHeaders, MimeType } from '@yggdrasilts/volundr';
+import { HttpHeaders, MimeType, BufferUtils } from '@yggdrasilts/volundr';
 
 import { ApiRoutes } from './api/api.routes';
 
@@ -43,6 +43,6 @@ export class AppController {
   @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
   async getImageInBase64(@Body() opt: Options): Promise<string> {
     this.logger.debug(`Incoming options: ${JSON.stringify(opt)}`);
-    return (await this.echartsService.getImage(opt)).toString('base64');
+    return BufferUtils.toBase64(await this.echartsService.getImage(opt));
   }
 }
