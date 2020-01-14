@@ -1,3 +1,6 @@
+# Files
+*.png
+
 # node
 package-lock.json
 
