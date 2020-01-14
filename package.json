@@ -1,7 +1,7 @@
 {
   "name": "echarts",
   "version": "1.0.0",
-  "description": "Service that use echartsjs to get images as file.",
+  "description": "Service that use echarts to get images.",
   "author": "David López <davidlopez.david@gmail.com>",
   "license": "MIT",
   "scripts": {
