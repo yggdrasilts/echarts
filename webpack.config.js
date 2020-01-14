@@ -14,8 +14,15 @@ module.exports = {
 	module: {
 		rules: [{
 			test: /.tsx?$/,
-			use: 'ts-loader',
-			exclude: /node_modules/
+			use: {
+				loader: 'ts-loader',
+				options: {
+					getCustomTransformers: (program) => ({
+						before: [require('@nestjs/swagger/plugin').before({}, program)]
+					}),
+				}
+			},
+			exclude: /node_modules/,
 		}]
 	},
 	mode: 'development',

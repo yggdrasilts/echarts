@@ -8,7 +8,7 @@ import * as imageminJpegtran from 'imagemin-jpegtran';
 
 import { DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT } from './constants';
 
-import { Options } from './entities/options.class';
+import { Options } from './entities/options.entity';
 
 @Injectable()
 export class EchartsService {

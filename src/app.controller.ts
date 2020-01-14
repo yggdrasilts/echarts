@@ -9,7 +9,7 @@ import { ApiRoutes } from './api/api.routes';
 import { BodyValidationPipe } from './pipes/body.validation.pipe';
 
 import { EchartsService } from './echarts/echarts.service';
-import { Options } from './echarts/entities/options.class';
+import { Options } from './echarts/entities/options.entity';
 import { IMAGE_BODY_VALIDATION_SCHEMA, DEFAULT_FILENAME } from './echarts/constants';
 
 @ApiTags('echarts')
@@ -25,7 +25,7 @@ export class AppController {
   @ApiOperation({ description: 'Gets an echarts image as attachment.' })
   @ApiProduces(MimeType.IMAGE.PNG)
   @ApiBadRequestResponse({ description: 'Bad Request.' })
-  @ApiCreatedResponse({ type: Buffer, description: 'The image is successfully returned.' })
+  @ApiCreatedResponse({ description: 'The image is successfully returned.' })
   async getImage(@Body() opt: Options, @Res() response: Response): Promise<void> {
     this.logger.debug(`Incoming options: ${JSON.stringify(opt)}`);
     const result = await this.echartsService.getImage(opt);
