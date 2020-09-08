@@ -28,7 +28,7 @@
     "@nestjs/swagger": "^4.1.2",
     "@yggdrasilts/axiosfit": "^0.6.1",
     "@yggdrasilts/volundr": "^0.1.8",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.11.0",
     "fs-extra": "^8.1.0",
     "imagemin": "^7.0.1",
